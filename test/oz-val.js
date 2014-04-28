@@ -1,23 +1,27 @@
 
 var Oz = require('oz');
 var ozScope = require('oz-scope');
+var ozVal = require('oz-val');
+var val = require('value');
 var assert = require('assert');
 var trigger = require('trigger-event');
 var children = require('children');
 
-Oz.use(ozScope);
+Oz
+  .use(ozScope)
+  .use(ozVal);
 
 describe('Rendering', function(){
 
   it('should not display undefined as a form value', function(){
     var els = children(Oz.render('<input oz-val="name">', {}));
 
-    assert(els[0].value === '');
+    assert(val(els[0]) === '');
   });
 
   it('should render form values', function(){
     var el = children(Oz.render('<input type="text" oz-val="person.name" />', { person: { name: 'Tobi' } }))[0];
-    assert('Tobi' == children(el)[0].value);
+    assert('Tobi' == val(el));
   });
 });
 
@@ -27,11 +31,11 @@ describe("Updating", function() {
 
     var template = Oz('<input type="text" oz-val="person.name" />');
     var el = children(template.render({ person: { name: 'Tobi' } }))[0];
-    assert('Tobi' == children(el)[0].value);
+    assert('Tobi' == val(el));
 
     template.update({ person: { name: 'Brian' } });
 
-    assert('Brian' == children(el)[0].value);
+    assert('Brian' == val(el));
   });
 
   it('should emit scoped form events', function (next) {
@@ -48,14 +52,9 @@ describe("Updating", function() {
       next();
     });
 
-    el.value = 'Tobi';
+    val(el, 'Tobi');
 
     trigger(el, 'change');
   });
 
 });
-
-describe("Events", function() {
-  it('should update on value changes', function(){
-  });
-})
