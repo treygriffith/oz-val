@@ -54,3 +54,8 @@ describe("Updating", function() {
   });
 
 });
+
+describe("Events", function() {
+  it('should update on value changes', function(){
+  });
+})
