@@ -21,20 +21,17 @@ module.exports.render = render;
  */
 // TODO: handle form elements like checkboxes, radio buttons
 
-function render (el, ctx, prop, scope, next) {
+function render (el, val, scope) {
 
-  var val = this.get(ctx, prop)
-    , self = this;
+  var change = this.change.bind(this);
 
   // set form value
   if(val !== undefined) value(el, val);
 
   // listen for changes to values
   onChange(this.events, el, function (val) {
-    self.change(self.scope(scope, prop), val);
+    change(scope, val);
   });
-
-  next();
 }
 
 // bind an element to all potential `change` events, but only trigger when content changes

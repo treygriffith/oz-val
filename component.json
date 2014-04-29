@@ -1,13 +1,13 @@
 {
   "name": "oz-val",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Form value tag for Oz",
   "dependencies": {
     "component/value": "1.1.0"
   },
   "development": {
-    "treygriffith/oz": "^0.1.0",
-    "treygriffith/oz-scope": "^0.0.1",
+    "treygriffith/oz": "^0.2.0",
+    "treygriffith/oz-scope": "0.1.0",
     "ramitos/children": "*",
     "component/assert": "*",
     "adamsanderson/trigger-event": "*"
